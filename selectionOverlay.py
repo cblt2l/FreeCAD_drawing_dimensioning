@@ -84,7 +84,12 @@ def generateSelectionGraphicsItems( viewObjects, onClickFun, transform=None, sce
                     graphicsItem.setZValue( 1.01**-r ) #smaller circles on top
                     postProcessGraphicsItem(graphicsItem, {'x':x,'y':y,'r':r})
                 if doPoints: 
-                    addSelectionPoint ( x, y )
+                    addSelectionPoint ( x, y ) #Circle center point
+                    addSelectionPoint ( x + r, y ) #Circle right quadrant point
+                    addSelectionPoint ( x - r, y ) #Circle left quadrant point
+                    addSelectionPoint ( x , y + r ) #Circle top quadrant point
+                    addSelectionPoint ( x , y - r ) #Circle bottom quadrant point
+                    
             if element.tag == 'text' and doTextItems:
                 addSelectionPoint( *element.applyTransforms( float( element.parms['x'] ), float( element.parms['y'] ) ) )
             if element.tag == 'path':
